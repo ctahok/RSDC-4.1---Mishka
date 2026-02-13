@@ -1,0 +1,64 @@
+[
+  {
+    "name": "file-operations",
+    "description": "Create, read, update, and list files. Includes safe-write protocols to prevent data loss."
+  },
+  {
+    "name": "git-automation",
+    "description": "Manage version control. Stage changes, generate conventional commits, and manage branches."
+  },
+  {
+    "name": "terminal-runner",
+    "description": "Execute shell commands. Use for installing packages, running builds, and system diagnostics."
+  },
+  {
+    "name": "code-analysis",
+    "description": "Analyze codebase structure using grep, ast-parsing, and file tree visualization."
+  },
+  {
+    "name": "test-verification",
+    "description": "Run unit tests and validate outputs against the 'Truth Conditions' defined in the PRD."
+  },
+  {
+    "name": "csharp-wpf-builder",
+    "description": "Build C# WPF applications with modern minimalistic UI for Windows. Generates project scaffolding and self-contained executables.",
+    "version": "1.0",
+    "path": "skills/csharp-wpf-builder"
+  },
+  {
+    "name": "powershell-module-builder",
+    "description": "Create PowerShell modules with cmdlets for CLI automation. Generates manifests, scripts, and installation helpers.",
+    "version": "1.0",
+    "path": "skills/powershell-module-builder"
+  },
+  {
+    "name": "mouse-input-simulator",
+    "description": "Simulate mouse movement and input via Windows API. Generates C# or PowerShell code for physical and virtual (zen) mouse jiggling.",
+    "version": "1.0",
+    "path": "skills/mouse-input-simulator"
+  },
+  {
+    "name": "hotkey-conflict-detector",
+    "description": "Detect Windows hotkey conflicts before registration using Windows API test registration",
+    "version": "1.0",
+    "path": "skills/hotkey-conflict-detector"
+  },
+  {
+    "name": "system-tray-manager",
+    "description": "Manage Windows system tray icon with context menu, always visible even when window hidden. Supports Unicode emoji icons.",
+    "version": "1.0",
+    "path": "skills/system-tray-manager"
+  },
+  {
+    "name": "startup-manager",
+    "description": "Manage Windows auto-startup via registry entries for applications",
+    "version": "1.0",
+    "path": "skills/startup-manager"
+  },
+  {
+    "name": "ui-enhancement-wpf",
+    "description": "Enhanced WPF UI components including settings dialogs, gear icons, improved text visibility, and about dialogs",
+    "version": "1.0",
+    "path": "skills/ui-enhancement-wpf"
+  }
+]

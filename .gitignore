@@ -1,0 +1,38 @@
+# .gitignore for Mishka (C# / .NET)
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bbin/
+bin/
+obj/
+artifacts/Mishka/bin/
+artifacts/Mishka/obj/
+artifacts/output/
+.tmp/
+
+# Visual Studio files
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# JetBrains Rider
+.idea/
+
+# Operating System files
+.DS_Store
+Thumbs.db

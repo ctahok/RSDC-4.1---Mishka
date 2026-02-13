@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tmp", ".tmp", "{8171D0AE-4262-3EAB-52BD-BB021CE126C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "artifacts", "artifacts", "{99116B1D-F007-E82B-443C-F02EDF2152BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseJiggler", ".tmp\MouseJiggler\MouseJiggler.csproj", "{91935784-4A92-490F-F0AA-A5499E79A8C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mishka", "artifacts\Mishka\Mishka.csproj", "{C1E951BA-3AA2-19AA-7E6F-940CFE7C8E66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91935784-4A92-490F-F0AA-A5499E79A8C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91935784-4A92-490F-F0AA-A5499E79A8C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91935784-4A92-490F-F0AA-A5499E79A8C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91935784-4A92-490F-F0AA-A5499E79A8C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1E951BA-3AA2-19AA-7E6F-940CFE7C8E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1E951BA-3AA2-19AA-7E6F-940CFE7C8E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1E951BA-3AA2-19AA-7E6F-940CFE7C8E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1E951BA-3AA2-19AA-7E6F-940CFE7C8E66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{91935784-4A92-490F-F0AA-A5499E79A8C7} = {8171D0AE-4262-3EAB-52BD-BB021CE126C4}
+		{C1E951BA-3AA2-19AA-7E6F-940CFE7C8E66} = {99116B1D-F007-E82B-443C-F02EDF2152BC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85B99AEF-A7AB-4210-890F-F763C420B676}
+	EndGlobalSection
+EndGlobal
