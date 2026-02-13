@@ -66,7 +66,7 @@ ABOUT_XAML = '''<Window x:Class="Mishka.AboutWindow"
 def main():
     parser = argparse.ArgumentParser(description='Generate about dialog')
     parser.add_argument('--output', required=True, help='Output file path')
-    parser.add_argument('--url', default='https://github.com/ctahok/RSDC-4.1-Mishka', help='GitHub URL')
+    parser.add_argument('--url', default='https://github.com/ctahok/RSDC-4.1---Mishka', help='GitHub URL')
     args = parser.parse_args()
     
     with open(args.output, 'w') as f:

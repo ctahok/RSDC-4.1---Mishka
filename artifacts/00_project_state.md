@@ -133,7 +133,7 @@ dotnet publish -c Release -o ../output
 - [x] Auto-startup with Windows via registry
 - [x] Start hidden in system tray
 - [x] Always visible tray icon (even when window hidden)
-- [x] About button with GitHub link (https://github.com/ctahok/RSDC-4.1-Mishka)
+- [x] About button with GitHub link (https://github.com/ctahok/RSDC-4.1---Mishka)
 - [x] Copyright: ©Copyright "iliko" 2026
 - [x] Enhanced text visibility (white on dark background)
 - [x] Settings persistence in %APPDATA%\Mishka\settings.json
