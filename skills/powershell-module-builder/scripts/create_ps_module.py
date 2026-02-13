@@ -10,7 +10,7 @@ def create_ps_module(name, output_path):
     # Create module manifest (.psd1)
     psd1_content = f'''@{{
     RootModule = '{name}.psm1'
-    ModuleVersion = '1.0.0'
+    ModuleVersion = '1.1.0'
     GUID = '12345678-1234-1234-1234-123456789012'
     Author = 'MouseJiggler'
     Description = 'Mouse jiggler PowerShell module for CLI automation'

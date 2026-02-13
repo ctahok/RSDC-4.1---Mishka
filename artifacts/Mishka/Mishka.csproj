@@ -12,6 +12,7 @@
     <SelfContained>false</SelfContained>
     <AssemblyTitle>Mishka</AssemblyTitle>
     <AssemblyDescription>Mouse Jiggler - Prevents screen saver activation</AssemblyDescription>
+    <Version>1.1.0</Version>
     <ApplicationIcon>app.ico</ApplicationIcon>
     <!-- Add error reporting and better native library handling -->
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>

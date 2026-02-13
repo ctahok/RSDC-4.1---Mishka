@@ -49,7 +49,7 @@ ABOUT_XAML = '''<Window x:Class="Mishka.AboutWindow"
                     <TextBlock Text="View on GitHub"/>
                 </Hyperlink>
             </TextBlock>
-            <TextBlock Text="Version 1.0.0"
+            <TextBlock Text="Version 1.1.0"
                        FontSize="12"
                        Foreground="{StaticResource SecondaryTextBrush}"
                        HorizontalAlignment="Center"/>

@@ -16,7 +16,7 @@ def create_manifest(module_dir: str, module_name: str, functions: list) -> str:
     
     content = f'''@{{
     RootModule = '{module_name}.psm1'
-    ModuleVersion = '1.0.0'
+    ModuleVersion = '1.1.0'
     GUID = '{guid}'
     Author = '{module_name}'
     CompanyName = '{module_name}'
