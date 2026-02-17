@@ -88,14 +88,14 @@ namespace Mishka
                     }
                     else
                     {
-                        // Physical mode: Actually move the cursor for visual feedback
+                        // Physical mode: Minimal cursor movement (barely noticeable)
                         GetCursorPos(out POINT point);
                         
-                        // Alternate between moving right and left for visible jiggle
-                        jiggleOffset = (jiggleOffset == 0) ? 5 : 0;
+                        // Tiny 1-pixel movement
+                        jiggleOffset = (jiggleOffset == 0) ? 1 : 0;
                         SetCursorPos(point.X + jiggleOffset, point.Y);
                         
-                        Thread.Sleep(50); // Brief pause so movement is visible
+                        Thread.Sleep(10); // Very brief pause
                         
                         // Move back to original position
                         if (jiggleOffset != 0)
