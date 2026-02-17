@@ -1,10 +1,35 @@
 # Project State - Mishka Application
 
-## Current Phase: Bug Fix - Screen Lock Prevention
+## Current Phase: Release v1.1.1 Complete
 
 ### Date: 2026-02-17
 
 ## Completed Tasks
+
+### ✅ Release v1.1.1 Published (2026-02-17)
+1. **Version Updates**
+   - Bumped version to 1.1.1 in Mishka.csproj
+   - Added dynamic version display in About window using Assembly.GetName().Version
+   - Version now shows automatically from assembly metadata
+
+2. **Mouse Movement Optimization**
+   - Reduced movement from 5 pixels to 1 pixel (minimal/barely noticeable)
+   - Reduced delay from 50ms to 10ms for faster return
+   - Still uses SetThreadExecutionState API for reliable prevention
+   - Physical mode now extremely subtle
+
+3. **Documentation**
+   - Created comprehensive RELEASE_NOTES.md with full version history
+   - Updated root README.md with v1.1.1 highlights
+   - Added What's New section
+   - Added usage instructions for Physical vs Zen modes
+
+4. **Git & GitHub**
+   - Created 5 commits for v1.1.1 release cycle
+   - Created git tag v1.1.1 with detailed release notes
+   - Pushed branch `1.1` to GitHub
+   - Pushed tag `v1.1.1` to GitHub
+   - Release executable prepared in releases/v1.1.1/
 
 ### ✅ Build Warnings Cleanup (2026-02-17)
 1. **Nullability Warnings Fixed**
@@ -71,6 +96,9 @@
 - **Screen Lock Prevention**: ✅ **FIXED AND VERIFIED**
 - **Build Quality**: ✅ **0 ERRORS, 0 WARNINGS**
 - **Executable Size**: ✅ **286 KB (framework-dependent)**
+- **Version**: ✅ **v1.1.1**
+- **GitHub**: ✅ **CODE PUSHED, TAG CREATED**
+- **Release**: ⏳ **PENDING MANUAL GITHUB RELEASE CREATION**
 
 ---
 *Project Complete - 2026*
@@ -105,8 +133,15 @@
 - [x] Created comprehensive README.md with installation and usage instructions
 
 ## In Progress
-- [ ] User testing of screen lock prevention
-- [ ] Verify cursor jiggle visibility in physical mode
+- [ ] Manual GitHub release creation (gh CLI not available)
+
+## Next Steps for User
+1. Go to https://github.com/ctahok/RSDC-4.1---Mishka/releases/new
+2. Select tag: v1.1.1
+3. Set title: "Mishka v1.1.1 - Minimal Movement & Dynamic Versioning"
+4. Upload: releases/v1.1.1/Mishka.exe (286 KB)
+5. Copy release notes from RELEASE_NOTES.md or see commit message in tag v1.1.1
+6. Publish release
 
 ## Output Location
 /mnt/c/TFS/RSDC 4.1 - Mishka/artifacts/Mishka/
