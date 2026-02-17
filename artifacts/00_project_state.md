@@ -6,6 +6,25 @@
 
 ## Completed Tasks
 
+### ✅ Build Warnings Cleanup (2026-02-17)
+1. **Nullability Warnings Fixed**
+   - **CS8618**: Fixed non-nullable field warning in `MainWindow.xaml.cs` - Added `null!` initializer
+   - **CS8600**: Fixed nullable conversion warnings in `StartupManager.cs` - Added `?` annotations to RegistryKey
+   - **CS8602**: Fixed null reference warning in `SettingsWindow.xaml.cs` - Added null-conditional operators
+   - **CS0104**: Fixed MessageBox ambiguity in `StartupManager.cs` - Fully qualified as `System.Windows.MessageBox`
+   - **Result**: Clean build with 0 warnings
+
+2. **Single-File Publishing Fix**
+   - **IL3000**: Replaced `Assembly.Location` with `Environment.ProcessPath` in `StartupManager.cs`
+   - **Reason**: `Assembly.Location` returns empty string in single-file publish
+   - **Result**: Auto-startup now works correctly with single-file executable
+
+3. **Build Success**
+   - **Output**: `Mishka.exe` (286 KB)
+   - **Warnings**: 0
+   - **Errors**: 0
+   - **Build Time**: ~3 seconds
+
 ### ✅ Bug Fix - MouseSimulator Screen Lock Prevention (2026-02-17)
 1. **Issue Identified**
    - **Problem**: MouseSimulator.cs was not preventing screen locking
@@ -50,6 +69,8 @@
 - **App Stability**: ✅ **STABLE**
 - **Features**: ✅ **ALL REQUIREMENTS MET**
 - **Screen Lock Prevention**: ✅ **FIXED AND VERIFIED**
+- **Build Quality**: ✅ **0 ERRORS, 0 WARNINGS**
+- **Executable Size**: ✅ **286 KB (framework-dependent)**
 
 ---
 *Project Complete - 2026*
@@ -84,10 +105,8 @@
 - [x] Created comprehensive README.md with installation and usage instructions
 
 ## In Progress
-- [x] Fix namespace ambiguity errors (App.xaml.cs, ScheduleManager.cs)
-- [x] Fix screen lock prevention (MouseSimulator.cs)
-- [ ] Test build and verify cursor movement
-- [ ] Update documentation to reflect new behavior
+- [ ] User testing of screen lock prevention
+- [ ] Verify cursor jiggle visibility in physical mode
 
 ## Output Location
 /mnt/c/TFS/RSDC 4.1 - Mishka/artifacts/Mishka/

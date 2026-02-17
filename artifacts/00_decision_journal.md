@@ -242,3 +242,112 @@ Also resolved two build errors:
    - Disambiguates between WinForms and Threading Timer classes
 
 These were caused by the project using both `UseWPF` and `UseWindowsForms` (needed for NotifyIcon).
+
+## Entry 5: Build Quality Improvements
+**Date:** 2026-02-17
+
+### Problem: Build Warnings and Modern C# Compliance
+
+After fixing the screen lock prevention, the build succeeded but generated 7 warnings:
+- **CS8618**: Non-nullable field not initialized
+- **CS8600**: Null literal conversion warnings (4 instances)
+- **CS8602**: Possible null reference dereference
+- **IL3000**: Assembly.Location returns empty string in single-file apps
+
+These warnings indicate code that isn't following .NET 8 nullable reference type best practices.
+
+### Solution: Comprehensive Nullability Fixes
+
+**1. Fixed MainWindow.xaml.cs (CS8618)**
+```csharp
+// BEFORE:
+private JiggleSettings settings;
+
+// AFTER:
+private JiggleSettings settings = null!; // Initialized in constructor
+```
+The `null!` operator tells the compiler "I know this looks uninitialized, but I guarantee it will be set before use."
+
+**2. Fixed StartupManager.cs (CS8600 + IL3000)**
+
+**Nullable Registry Keys:**
+```csharp
+// BEFORE:
+using (RegistryKey key = Registry.CurrentUser.OpenSubKey(RUN_KEY, false))
+
+// AFTER:
+using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(RUN_KEY, false))
+```
+Added `?` annotation because `OpenSubKey` can return null if the key doesn't exist.
+
+**Single-File Path Detection:**
+```csharp
+// BEFORE:
+string executablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+if (executablePath.EndsWith(".dll"))
+{
+    executablePath = executablePath.Replace(".dll", ".exe");
+}
+
+// AFTER:
+string? executablePath = Environment.ProcessPath;
+if (string.IsNullOrEmpty(executablePath))
+{
+    System.Windows.MessageBox.Show("Unable to determine application path.", "Error", ...);
+    return;
+}
+```
+
+**Why This Matters:**
+- `Assembly.Location` returns **empty string** in single-file published apps (.NET 5+)
+- `Environment.ProcessPath` is the modern, reliable way to get the .exe path
+- This ensures auto-startup works correctly with our single-file publish configuration
+
+**MessageBox Ambiguity Fix:**
+```csharp
+// BEFORE:
+MessageBox.Show(...) // Ambiguous!
+
+// AFTER:
+System.Windows.MessageBox.Show(...) // WPF version
+```
+
+**3. Fixed SettingsWindow.xaml.cs (CS8602)**
+```csharp
+// BEFORE:
+if (item.Content.ToString().StartsWith(...))
+
+// AFTER:
+if (item.Content?.ToString()?.StartsWith(...) == true)
+```
+Used null-conditional operators (`?.`) to safely handle potential null values.
+
+### Build Results
+
+**Before Fixes:**
+- Errors: 0
+- Warnings: 7 (CS8618, CS8600 x4, CS8602, IL3000)
+- Build Time: ~15 seconds
+
+**After Fixes:**
+- Errors: 0
+- Warnings: **0** ✅
+- Build Time: ~3 seconds
+- Output: `Mishka.exe` (286 KB)
+
+### Impact
+
+1. **Code Quality**: Follows modern C# nullable reference type conventions
+2. **Reliability**: Auto-startup now works with single-file publish
+3. **Maintainability**: No compiler warnings to confuse future developers
+4. **Professional**: Clean build demonstrates attention to detail
+
+### Files Modified
+- `artifacts/Mishka/MainWindow.xaml.cs` - Added `null!` initializer
+- `artifacts/Mishka/StartupManager.cs` - Environment.ProcessPath, nullable annotations
+- `artifacts/Mishka/SettingsWindow.xaml.cs` - Null-conditional operators
+
+### Commits
+- Commit `94f3df7`: Screen lock prevention fix
+- Commit `6dfdd82`: Build warnings cleanup
+
