@@ -1,4 +1,4 @@
-# Mishka: Advanced Mouse Jiggler Suite 🖱️ v1.3.5
+# Mishka: Advanced Mouse Jiggler Suite 🖱️ v1.3.6
 
 Mishka is a professional-grade Windows utility designed to keep your system active and prevent screen lock or sleep. It offers both a polished GUI application and a PowerShell CLI module for automation.
 

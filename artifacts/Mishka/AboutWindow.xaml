@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -44,14 +45,13 @@
                 </Hyperlink>
             </TextBlock>
             <TextBlock x:Name="txtVersion"
-                       Text="Version 1.1.1"
                        FontSize="12"
                        Foreground="{StaticResource ForegroundBrush}"
                        HorizontalAlignment="Center"/>
         </StackPanel>
         
         <!-- Copyright -->
-        <TextBlock Grid.Row="3" 
+        <TextBlock Grid.Row="4" 
                    Text="©Copyright &#x22;iliko&#x22; 2026"
                    Style="{StaticResource CopyrightTextStyle}"/>
         
