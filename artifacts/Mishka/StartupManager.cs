@@ -57,9 +57,10 @@ namespace Mishka
         {
             try
             {
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(RUN_KEY, true))
+                RegistryKey? key = Registry.CurrentUser.OpenSubKey(RUN_KEY, true);
+                if (key != null)
                 {
-                    key?.DeleteValue(APP_NAME, false);
+                    key.DeleteValue(APP_NAME, false);
                 }
             }
             catch (Exception ex)

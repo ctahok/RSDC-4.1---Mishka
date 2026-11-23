@@ -304,8 +304,8 @@ namespace Mishka
             {
                 txtStatus.Text = $"Starting in {delaySecondsRemaining} seconds...";
                 txtStatus.Foreground = new SolidColorBrush(Colors.Orange);
-                string modStr = settings.HotkeyModifiers.ToString().Replace(", ", "+");
-                txtHotkey.Text = $"Press {modStr}+{settings.HotkeyKey} to hide/show";
+                string delayModStr = settings.HotkeyModifiers.ToString().Replace(", ", "+");
+                txtHotkey.Text = $"Press {delayModStr}+{settings.HotkeyKey} to hide/show";
                 return;
             }
 

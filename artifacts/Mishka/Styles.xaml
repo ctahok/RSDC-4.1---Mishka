@@ -268,10 +268,11 @@
     
     <!-- Copyright Text Style -->
     <Style x:Key="CopyrightTextStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,16,0,0"/>
+        <Setter Property="FontWeight" Value="Normal"/>
     </Style>
     
 </ResourceDictionary>
