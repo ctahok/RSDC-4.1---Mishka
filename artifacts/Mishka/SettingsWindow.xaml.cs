@@ -114,7 +114,7 @@ namespace Mishka
             // Initialize start delay
             foreach (ComboBoxItem item in cmbStartDelay.Items)
             {
-                if (item.Content.ToString().StartsWith(settings.StartDelaySeconds.ToString()))
+                if (item.Content?.ToString()?.StartsWith(settings.StartDelaySeconds.ToString()) == true)
                 {
                     item.IsSelected = true;
                     break;
@@ -127,7 +127,7 @@ namespace Mishka
             // Initialize inactivity timeout
             foreach (ComboBoxItem item in cmbInactivityTimeout.Items)
             {
-                if (item.Content.ToString().StartsWith(settings.UserInactivityTimeoutSeconds.ToString()))
+                if (item.Content?.ToString()?.StartsWith(settings.UserInactivityTimeoutSeconds.ToString()) == true)
                 {
                     item.IsSelected = true;
                     break;

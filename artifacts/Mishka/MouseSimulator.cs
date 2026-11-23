@@ -14,6 +14,12 @@ namespace Mishka
         
         [DllImport("user32.dll")]
         static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, int dwExtraInfo);
+
+        [DllImport("user32.dll")]
+        static extern bool GetLastInputInfo(out LASTINPUTINFO plii);
+
+        [DllImport("kernel32.dll")]
+        static extern uint SetThreadExecutionState(uint esFlags);
         
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT
@@ -37,9 +43,14 @@ namespace Mishka
         const uint ES_SYSTEM_REQUIRED = 0x00000001;
         
         private static Thread? jiggleThread;
+        private static Thread? userActivityMonitorThread;
         private static volatile bool isRunning = false;
+        private static volatile bool isPausedByUserActivity = false;
         private static volatile bool zenMode = false;
+        private static volatile bool stopOnUserActivity = true;
         private static volatile int intervalMs = 1000;
+        private static volatile int userInactivityTimeoutSeconds = 30;
+        private static volatile bool userActivityMonitorRunning = false;
         
         public static event EventHandler? StatusChanged;
         
