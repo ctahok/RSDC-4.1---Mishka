@@ -104,7 +104,7 @@ namespace Mishka
             // Initialize interval
             foreach (ComboBoxItem item in cmbInterval.Items)
             {
-                if (item.Content.ToString().StartsWith(settings.IntervalMs.ToString()))
+                if (item.Content?.ToString()?.StartsWith(settings.IntervalMs.ToString()) == true)
                 {
                     item.IsSelected = true;
                     break;

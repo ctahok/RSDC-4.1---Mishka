@@ -14,11 +14,11 @@ namespace Mishka
         {
             try
             {
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(RUN_KEY, false))
+                using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(RUN_KEY, false))
                 {
                     if (key != null)
                     {
-                        string value = key.GetValue(APP_NAME) as string;
+                        string? value = key.GetValue(APP_NAME) as string;
                         return !string.IsNullOrEmpty(value);
                     }
                 }
@@ -34,14 +34,17 @@ namespace Mishka
         {
             try
             {
-                string executablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                // For single-file publish, get the .exe path
-                if (executablePath.EndsWith(".dll"))
+                // Use Environment.ProcessPath for single-file publish compatibility (.NET 5+)
+                string? executablePath = Environment.ProcessPath;
+                
+                if (string.IsNullOrEmpty(executablePath))
                 {
-                    executablePath = executablePath.Replace(".dll", ".exe");
+                    System.Windows.MessageBox.Show("Unable to determine application path.", "Error", 
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
                 
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(RUN_KEY, true))
+                using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(RUN_KEY, true))
                 {
                     key?.SetValue(APP_NAME, executablePath);
                 }
@@ -57,7 +60,7 @@ namespace Mishka
         {
             try
             {
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(RUN_KEY, true))
+                using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(RUN_KEY, true))
                 {
                     key?.DeleteValue(APP_NAME, false);
                 }

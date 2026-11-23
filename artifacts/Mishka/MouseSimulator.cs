@@ -14,10 +14,7 @@ namespace Mishka
         
         [DllImport("user32.dll")]
         static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, int dwExtraInfo);
-
-        [DllImport("user32.dll")]
-        static extern bool GetLastInputInfo(out LASTINPUTINFO plii);
-
+        
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT
         {
@@ -34,15 +31,15 @@ namespace Mishka
 
         const uint MOUSEEVENTF_MOVE = 0x0001;
         
+        // Execution State flags to prevent screen saver and sleep
+        const uint ES_CONTINUOUS = 0x80000000;
+        const uint ES_DISPLAY_REQUIRED = 0x00000002;
+        const uint ES_SYSTEM_REQUIRED = 0x00000001;
+        
         private static Thread? jiggleThread;
         private static volatile bool isRunning = false;
         private static volatile bool zenMode = false;
         private static volatile int intervalMs = 1000;
-        private static volatile bool stopOnUserActivity = true;
-        private static volatile int userInactivityTimeoutSeconds = 30;
-        private static volatile bool isPausedByUserActivity = false;
-        private static volatile bool userActivityMonitorRunning = false;
-        private static Thread? userActivityMonitorThread;
         
         public static event EventHandler? StatusChanged;
         
@@ -55,8 +52,7 @@ namespace Mishka
             MouseSimulator.stopOnUserActivity = stopOnUserActivity;
             MouseSimulator.userInactivityTimeoutSeconds = userInactivityTimeoutSeconds;
             isRunning = true;
-            isPausedByUserActivity = false;
-
+            
             jiggleThread = new Thread(JiggleLoop);
             jiggleThread.IsBackground = true;
             jiggleThread.Start();
@@ -72,6 +68,10 @@ namespace Mishka
             isPausedByUserActivity = false;
             StopUserActivityMonitor();
             jiggleThread?.Join(100);
+            
+            // Restore normal power management
+            SetThreadExecutionState(ES_CONTINUOUS);
+            
             StatusChanged?.Invoke(null, EventArgs.Empty);
         }
         
@@ -150,18 +150,15 @@ namespace Mishka
                 {
                     if (zenMode)
                     {
-                        mouse_event(MOUSEEVENTF_MOVE, 1, 0, 0, 0);
-                        Thread.Sleep(10);
-                        mouse_event(MOUSEEVENTF_MOVE, 0xFFFFFFFF, 0, 0, 0);
+                        // Zen mode: Use execution state only (no visible movement)
+                        // Refresh the execution state to keep system awake
+                        SetThreadExecutionState(ES_CONTINUOUS | ES_DISPLAY_REQUIRED | ES_SYSTEM_REQUIRED);
                     }
                     else
                     {
+                        // Physical mode: Minimal cursor movement (barely noticeable)
                         GetCursorPos(out POINT point);
-                        SetCursorPos(point.X + 5, point.Y);
-                        Thread.Sleep(10);
-                        SetCursorPos(point.X, point.Y);
-                        Thread.Sleep(10);
-                        SetCursorPos(point.X, point.Y + 5);
+                        SetCursorPos(point.X + 1, point.Y);
                         Thread.Sleep(10);
                         SetCursorPos(point.X, point.Y);
                     }

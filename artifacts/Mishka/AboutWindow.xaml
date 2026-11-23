@@ -43,7 +43,8 @@
                     <TextBlock Text="View on GitHub"/>
                 </Hyperlink>
             </TextBlock>
-            <TextBlock Text="Version 1.1.0"
+            <TextBlock x:Name="txtVersion"
+                       Text="Version 1.1.1"
                        FontSize="12"
                        Foreground="{StaticResource ForegroundBrush}"
                        HorizontalAlignment="Center"/>

@@ -10,7 +10,7 @@ namespace Mishka
 {
     public partial class MainWindow : Window
     {
-        private JiggleSettings settings;
+        private JiggleSettings settings = null!; // Initialized in constructor
         private TrayIconManager? trayIconManager;
         private HotkeyManager? hotkeyManager;
         private ScheduleManager? scheduleManager;
