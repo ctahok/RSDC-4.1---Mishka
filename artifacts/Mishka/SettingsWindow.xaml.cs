@@ -110,6 +110,29 @@ namespace Mishka
                     break;
                 }
             }
+
+            // Initialize start delay
+            foreach (ComboBoxItem item in cmbStartDelay.Items)
+            {
+                if (item.Content.ToString().StartsWith(settings.StartDelaySeconds.ToString()))
+                {
+                    item.IsSelected = true;
+                    break;
+                }
+            }
+
+            // Initialize stop on user activity
+            chkStopOnUserActivity.IsChecked = settings.StopOnUserActivity;
+
+            // Initialize inactivity timeout
+            foreach (ComboBoxItem item in cmbInactivityTimeout.Items)
+            {
+                if (item.Content.ToString().StartsWith(settings.UserInactivityTimeoutSeconds.ToString()))
+                {
+                    item.IsSelected = true;
+                    break;
+                }
+            }
         }
         
         private void BtnTestHotkey_Click(object sender, RoutedEventArgs e)
@@ -223,6 +246,23 @@ namespace Mishka
             if (int.TryParse(intervalText.Split(' ')[0], out int intervalMs))
             {
                 settings.IntervalMs = intervalMs;
+            }
+
+            // Start delay
+            string delayText = ((ComboBoxItem)cmbStartDelay.SelectedItem)?.Content.ToString() ?? "0 seconds";
+            if (int.TryParse(delayText.Split(' ')[0], out int delaySeconds))
+            {
+                settings.StartDelaySeconds = delaySeconds;
+            }
+
+            // Stop on user activity
+            settings.StopOnUserActivity = chkStopOnUserActivity.IsChecked ?? true;
+
+            // Inactivity timeout
+            string timeoutText = ((ComboBoxItem)cmbInactivityTimeout.SelectedItem)?.Content.ToString() ?? "30 seconds";
+            if (int.TryParse(timeoutText.Split(' ')[0], out int timeoutSeconds))
+            {
+                settings.UserInactivityTimeoutSeconds = timeoutSeconds;
             }
             
             // Auto-startup

@@ -15,6 +15,8 @@ namespace Mishka
         private HotkeyManager? hotkeyManager;
         private ScheduleManager? scheduleManager;
         private System.Windows.Threading.DispatcherTimer? statusTimer;
+        private System.Windows.Threading.DispatcherTimer? startDelayTimer;
+        private int delaySecondsRemaining;
         
         public MainWindow()
         {
@@ -200,13 +202,41 @@ namespace Mishka
         {
             chkZenMode.IsEnabled = true;
             settings.EnableJiggle = true;
-            StartJiggling();
+
+            // Cancel any pending delay timer
+            startDelayTimer?.Stop();
+            startDelayTimer = null;
+
+            if (settings.StartDelaySeconds > 0)
+            {
+                // Start countdown delay
+                delaySecondsRemaining = settings.StartDelaySeconds;
+                startDelayTimer = new System.Windows.Threading.DispatcherTimer
+                {
+                    Interval = TimeSpan.FromSeconds(1)
+                };
+                startDelayTimer.Tick += StartDelayTimer_Tick;
+                startDelayTimer.Start();
+                UpdateStatus();
+            }
+            else
+            {
+                StartJiggling();
+            }
+
+            SettingsManager.Save(settings);
         }
         
         private void ChkEnableJiggle_Unchecked(object sender, RoutedEventArgs e)
         {
             chkZenMode.IsEnabled = false;
             settings.EnableJiggle = false;
+
+            // Cancel any pending delay
+            startDelayTimer?.Stop();
+            startDelayTimer = null;
+            delaySecondsRemaining = 0;
+
             StopJiggling();
         }
 
@@ -232,7 +262,7 @@ namespace Mishka
         
         private void StartJiggling()
         {
-            MouseSimulator.Start(chkZenMode.IsChecked ?? false, settings.IntervalMs);
+            MouseSimulator.Start(chkZenMode.IsChecked ?? false, settings.IntervalMs, settings.StopOnUserActivity, settings.UserInactivityTimeoutSeconds);
             UpdateStatus();
             SettingsManager.Save(settings);
         }
@@ -248,6 +278,19 @@ namespace Mishka
         {
             UpdateStatus();
         }
+
+        private void StartDelayTimer_Tick(object? sender, EventArgs e)
+        {
+            delaySecondsRemaining--;
+            UpdateStatus();
+
+            if (delaySecondsRemaining <= 0)
+            {
+                startDelayTimer?.Stop();
+                startDelayTimer = null;
+                StartJiggling();
+            }
+        }
         
         private void UpdateStatus()
         {
@@ -256,18 +299,36 @@ namespace Mishka
                 Dispatcher.Invoke(UpdateStatus);
                 return;
             }
+            // Show delay countdown if active
+            if (startDelayTimer != null && delaySecondsRemaining > 0)
+            {
+                txtStatus.Text = $"Starting in {delaySecondsRemaining} seconds...";
+                txtStatus.Foreground = new SolidColorBrush(Colors.Orange);
+                string modStr = settings.HotkeyModifiers.ToString().Replace(", ", "+");
+                txtHotkey.Text = $"Press {modStr}+{settings.HotkeyKey} to hide/show";
+                return;
+            }
+
             if (MouseSimulator.IsRunning)
             {
                 string mode = MouseSimulator.IsZenMode ? " (Zen Mode)" : "";
-                txtStatus.Text = $"Status: Running{mode}";
-                txtStatus.Foreground = new SolidColorBrush(Colors.LightGreen);
+                if (MouseSimulator.IsPausedByUserActivity)
+                {
+                    txtStatus.Text = $"Paused: User activity detected{mode}";
+                    txtStatus.Foreground = new SolidColorBrush(Colors.Orange);
+                }
+                else
+                {
+                    txtStatus.Text = $"Status: Running{mode}";
+                    txtStatus.Foreground = new SolidColorBrush(Colors.LightGreen);
+                }
             }
             else
             {
                 txtStatus.Text = "Status: Stopped";
                 txtStatus.Foreground = new SolidColorBrush(Colors.Gray);
             }
-            
+
             string modStr = settings.HotkeyModifiers.ToString().Replace(", ", "+");
             txtHotkey.Text = $"Press {modStr}+{settings.HotkeyKey} to hide/show";
         }
@@ -378,6 +439,8 @@ namespace Mishka
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MouseSimulator.Stop();
+            startDelayTimer?.Stop();
+            startDelayTimer = null;
             hotkeyManager?.Dispose();
             scheduleManager?.Stop();
             statusTimer?.Stop();
