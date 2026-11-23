@@ -161,9 +161,14 @@ namespace Mishka
                 {
                     if (zenMode)
                     {
-                        // Zen mode: Use execution state only (no visible movement)
+                        // Zen mode: Minimal cursor movement (barely noticeable) to prevent screensaver
                         // Refresh the execution state to keep system awake
                         SetThreadExecutionState(ES_CONTINUOUS | ES_DISPLAY_REQUIRED | ES_SYSTEM_REQUIRED);
+
+                        GetCursorPos(out POINT point);
+                        SetCursorPos(point.X + 1, point.Y);
+                        Thread.Sleep(10);
+                        SetCursorPos(point.X, point.Y);
                     }
                     else
                     {

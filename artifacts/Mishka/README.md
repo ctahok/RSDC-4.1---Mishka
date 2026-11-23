@@ -1,4 +1,4 @@
-# Mishka 🖱️ v1.3.0
+# Mishka 🖱️ v1.3.5
 
 Mishka (Russian for "Little Mouse") is a robust, high-visibility mouse jiggler application for Windows 11. It prevents screen saver activation and system sleep by simulating mouse activity with advanced features like scheduled automation, global hotkeys, and system tray integration.
 
@@ -13,18 +13,20 @@ Mishka (Russian for "Little Mouse") is a robust, high-visibility mouse jiggler a
 - 👻 **Tray-Only Mode**: "Start Minimized" option allows the app to launch directly to the system tray without showing a window.
 - 🎯 **Dual Jiggle Modes**:
   - **Physical Mode**: Slightly moves the mouse cursor back and forth.
-  - **Zen Mode**: Virtual movement that keeps the cursor Visually still while the system detects activity.
+  - **Zen Mode**: Minimal, barely-visible cursor movement (1 pixel) that prevents screensaver activation and system sleep without being distracting.
 - 🎨 **High-Visibility UI**: A clean, modern Fluent 2-inspired light theme with maximum contrast for better accessibility.
 - 🔍 **Runtime Validation**: Automatically detects if the required .NET 8 Runtime is missing and provides a direct download link.
 - 🛠️ **Robust Stability**: Thread-safe implementation with comprehensive error handling to prevent hangs and crashes.
 
-## 🆕 What's New in v1.3.0
+## 🆕 What's New in v1.3.5
 
+- **Fixed**: Build failure with .NET SDK 11 (`GenerateBundle` task crash) by disabling single-file publishing; `Mishka.exe` now runs alongside its required DLLs
+- **Added**: Assembly version metadata (`AssemblyVersion`, `FileVersion`, `InformationalVersion` all set to 1.3.5)
 - **Fixed**: Missing P/Invoke declarations for `GetLastInputInfo` (user32.dll) and `SetThreadExecutionState` (kernel32.dll) that prevented compilation
 - **Fixed**: Missing static field declarations (`userActivityMonitorThread`, `userActivityMonitorRunning`, `isPausedByUserActivity`, `stopOnUserActivity`, `userInactivityTimeoutSeconds`) in `MouseSimulator.cs`
 - **Fixed**: Duplicate local variable `modStr` in `MainWindow.xaml.cs` `UpdateStatus()` method
 - **Fixed**: Nullable dereference warnings in `SettingsWindow.xaml.cs`
-- **Improved**: Build reliability with all compilation errors resolved
+- **Improved**: Zen mode now performs tiny, barely-visible cursor movements to prevent screensaver activation (previously only prevented sleep/display-off)
 
 ## 📋 System Requirements
 
