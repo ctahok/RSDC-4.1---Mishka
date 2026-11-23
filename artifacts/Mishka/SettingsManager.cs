@@ -20,6 +20,9 @@ namespace Mishka
         public bool StartMinimized { get; set; }
         public bool AutoStartup { get; set; }
         public bool StartHidden { get; set; }
+        public int StartDelaySeconds { get; set; }
+        public bool StopOnUserActivity { get; set; } = true;
+        public int UserInactivityTimeoutSeconds { get; set; } = 30;
     }
     
     public static class SettingsManager
