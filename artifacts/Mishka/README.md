@@ -1,4 +1,4 @@
-# Mishka 🖱️
+# Mishka 🖱️ v1.3.7
 
 Mishka (Russian for "Little Mouse") is a robust, high-visibility mouse jiggler application for Windows 11. It prevents screen saver activation and system sleep by simulating mouse activity with advanced features like scheduled automation, global hotkeys, and system tray integration.
 
@@ -13,10 +13,19 @@ Mishka (Russian for "Little Mouse") is a robust, high-visibility mouse jiggler a
 - 👻 **Tray-Only Mode**: "Start Minimized" option allows the app to launch directly to the system tray without showing a window.
 - 🎯 **Dual Jiggle Modes**:
   - **Physical Mode**: Slightly moves the mouse cursor back and forth.
-  - **Zen Mode**: Virtual movement that keeps the cursor Visually still while the system detects activity.
+  - **Zen Mode**: Minimal, barely-visible cursor movement (1 pixel) that prevents screensaver activation and system sleep without being distracting.
 - 🎨 **High-Visibility UI**: A clean, modern Fluent 2-inspired light theme with maximum contrast for better accessibility.
 - 🔍 **Runtime Validation**: Automatically detects if the required .NET 8 Runtime is missing and provides a direct download link.
 - 🛠️ **Robust Stability**: Thread-safe implementation with comprehensive error handling to prevent hangs and crashes.
+
+## 🆕 What's New in v1.3.7
+
+- **Fixed**: About window version and Copyright lines not visible — removed spacer row that pushed content off-screen, added fallback version text, fixed Copyright text contrast
+- **Fixed**: All merge conflicts resolved in `MouseSimulator.cs` — combined local Zen mode cursor movement with remote `jiggleOffset` variable
+- **Fixed**: Duplicate `modStr` variable in `MainWindow.xaml.cs`
+- **Fixed**: Nullable dereference warnings in `SettingsWindow.xaml.cs` and `StartupManager.cs`
+- **Fixed**: SDK 11 `GenerateBundle` crash by disabling single-file publishing
+- **Added**: Assembly version metadata (1.3.7)
 
 ## 📋 System Requirements
 
