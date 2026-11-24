@@ -42,7 +42,6 @@ namespace Mishka
         
         private static Thread? jiggleThread;
         private static volatile bool isRunning = false;
-        private static volatile bool zenMode = false;
         private static volatile int intervalMs = 1000;
         private static volatile bool stopOnUserActivity = true;
         private static volatile int userInactivityTimeoutSeconds = 30;
@@ -57,7 +56,6 @@ namespace Mishka
         {
             if (isRunning) return;
 
-            zenMode = virtualMode;
             intervalMs = interval;
             MouseSimulator.stopOnUserActivity = stopOnUserActivity;
             MouseSimulator.userInactivityTimeoutSeconds = userInactivityTimeoutSeconds;
@@ -150,7 +148,6 @@ namespace Mishka
         }
 
         public static bool IsRunning => isRunning;
-        public static bool IsZenMode => zenMode;
         public static int Interval => intervalMs;
         public static bool IsPausedByUserActivity => isPausedByUserActivity;
         public static bool StopOnUserActivity => stopOnUserActivity;
@@ -162,32 +159,18 @@ namespace Mishka
             {
                 try
                 {
-                    if (zenMode)
-                    {
-                        // Zen mode: Minimal cursor movement (barely noticeable) to prevent screensaver
-                        // Refresh the execution state to keep system awake
-                        SetThreadExecutionState(ES_CONTINUOUS | ES_DISPLAY_REQUIRED | ES_SYSTEM_REQUIRED);
+                    // Physical mode: Move cursor back and forth for visual feedback
+                    GetCursorPos(out POINT point);
+                    // Alternate between moving right and left for visible jiggle
+                    jiggleOffset = (jiggleOffset == 0) ? 5 : 0;
+                    SetCursorPos(point.X + jiggleOffset, point.Y);
 
-                        GetCursorPos(out POINT point);
-                        SetCursorPos(point.X + 1, point.Y);
-                        Thread.Sleep(10);
+                    Thread.Sleep(50); // Brief pause so movement is visible
+
+                    // Move back to original position
+                    if (jiggleOffset != 0)
+                    {
                         SetCursorPos(point.X, point.Y);
-                    }
-                    else
-                    {
-                        // Physical mode: Actually move the cursor for visual feedback
-                        GetCursorPos(out POINT point);
-                        // Alternate between moving right and left for visible jiggle
-                        jiggleOffset = (jiggleOffset == 0) ? 5 : 0;
-                        SetCursorPos(point.X + jiggleOffset, point.Y);
-
-                        Thread.Sleep(50); // Brief pause so movement is visible
-
-                        // Move back to original position
-                        if (jiggleOffset != 0)
-                        {
-                            SetCursorPos(point.X, point.Y);
-                        }
                     }
                 }
                 catch { }

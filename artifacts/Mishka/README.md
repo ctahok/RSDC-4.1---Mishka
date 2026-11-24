@@ -1,4 +1,4 @@
-# Mishka 🖱️ v1.3.7
+# Mishka 🖱️ v1.3.8
 
 Mishka (Russian for "Little Mouse") is a robust, high-visibility mouse jiggler application for Windows 11. It prevents screen saver activation and system sleep by simulating mouse activity with advanced features like scheduled automation, global hotkeys, and system tray integration.
 
@@ -11,9 +11,7 @@ Mishka (Russian for "Little Mouse") is a robust, high-visibility mouse jiggler a
 - 📅 **Scheduled Automation**: Set specific days and times for Mishka to work automatically (e.g., Mon-Fri, 09:00 - 17:00).
 - 🚀 **Auto-Startup**: Option to start automatically with Windows via the registry.
 - 👻 **Tray-Only Mode**: "Start Minimized" option allows the app to launch directly to the system tray without showing a window.
-- 🎯 **Dual Jiggle Modes**:
-  - **Physical Mode**: Slightly moves the mouse cursor back and forth.
-  - **Zen Mode**: Minimal, barely-visible cursor movement (1 pixel) that prevents screensaver activation and system sleep without being distracting.
+- 🎯 **Physical Jiggle Mode**: Slightly moves the mouse cursor back and forth to prevent screensaver activation.
 - 🎨 **High-Visibility UI**: A clean, modern Fluent 2-inspired light theme with maximum contrast for better accessibility.
 - 🔍 **Runtime Validation**: Automatically detects if the required .NET 8 Runtime is missing and provides a direct download link.
 - 🛠️ **Robust Stability**: Thread-safe implementation with comprehensive error handling to prevent hangs and crashes.
@@ -26,6 +24,13 @@ Mishka (Russian for "Little Mouse") is a robust, high-visibility mouse jiggler a
 - **Fixed**: Nullable dereference warnings in `SettingsWindow.xaml.cs` and `StartupManager.cs`
 - **Fixed**: SDK 11 `GenerateBundle` crash by disabling single-file publishing
 - **Added**: Assembly version metadata (1.3.7)
+
+## 🆕 What's New in v1.3.8
+
+- **Removed**: Zen jiggle mode entirely — even minimal cursor movement was considered unwanted; only Physical Mode remains
+- **Removed**: Copyright line from About window for cleaner UI
+- **Removed**: Zen Mode checkbox from main window UI
+- **Updated**: About window layout — removed empty spacer row, version text now shows reliably
 
 ## 📋 System Requirements
 

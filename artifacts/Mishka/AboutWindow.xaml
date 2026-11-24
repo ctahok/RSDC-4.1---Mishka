@@ -11,7 +11,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <!-- Icon and Title -->
@@ -49,11 +48,6 @@
                        Foreground="{StaticResource ForegroundBrush}"
                        HorizontalAlignment="Center"/>
         </StackPanel>
-        
-        <!-- Copyright -->
-        <TextBlock Grid.Row="3" 
-                   Text="© Copyright 'iliko' 2026"
-                   Style="{StaticResource CopyrightTextStyle}"/>
-        
+
     </Grid>
 </Window>

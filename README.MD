@@ -1,4 +1,4 @@
-# Mishka: Advanced Mouse Jiggler Suite 🖱️ v1.3.7
+# Mishka: Advanced Mouse Jiggler Suite 🖱️ v1.3.8
 
 **Version 1.1.1** - Minimal Movement, Maximum Reliability
 
@@ -6,7 +6,7 @@ Mishka is a professional-grade Windows utility designed to keep your system acti
 
 ## 🌟 Key Features
 
-- **Minimal Movement**: Barely noticeable 1-pixel cursor jiggle (or invisible Zen mode)
+- **Physical Movement**: Slightly moves the mouse cursor back and forth to prevent screensaver activation.
 - **Reliable Prevention**: Uses official Windows `SetThreadExecutionState` API
 - **Intuitive GUI**: Modern, high-visibility interface for easy configuration
 - **PowerShell CLI**: Scriptable control over mouse activity and schedules

@@ -48,15 +48,6 @@
                       Checked="ChkEnableJiggle_Checked"
                       Unchecked="ChkEnableJiggle_Unchecked"/>
             
-            <CheckBox x:Name="chkZenMode" 
-                      Content="Zen jiggle? (virtual mode - cursor stays still)"
-                      FontSize="13"
-                      Margin="30,0,0,10"
-                      IsEnabled="False"
-                      Foreground="{StaticResource ForegroundBrush}"
-                      Checked="ChkZenMode_Checked"
-                      Unchecked="ChkZenMode_Unchecked"/>
-            
             <Border Background="{StaticResource HoverBrush}" 
                     CornerRadius="5"
                     Padding="12,10"

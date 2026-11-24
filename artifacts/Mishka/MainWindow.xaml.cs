@@ -145,12 +145,6 @@ namespace Mishka
         
         private void InitializeUI()
         {
-            // Set ZenMode first so it's ready when EnableJiggle fires events
-            chkZenMode.IsChecked = settings.ZenMode;
-            
-            // Enable/Disable ZenMode UI state based on settings
-            chkZenMode.IsEnabled = settings.EnableJiggle;
-
             // Set EnableJiggle last to trigger startup jiggling if enabled
             chkEnableJiggle.IsChecked = settings.EnableJiggle;
             
@@ -200,7 +194,6 @@ namespace Mishka
         
         private void ChkEnableJiggle_Checked(object sender, RoutedEventArgs e)
         {
-            chkZenMode.IsEnabled = true;
             settings.EnableJiggle = true;
 
             // Cancel any pending delay timer
@@ -229,7 +222,6 @@ namespace Mishka
         
         private void ChkEnableJiggle_Unchecked(object sender, RoutedEventArgs e)
         {
-            chkZenMode.IsEnabled = false;
             settings.EnableJiggle = false;
 
             // Cancel any pending delay
@@ -240,29 +232,9 @@ namespace Mishka
             StopJiggling();
         }
 
-        private void ChkZenMode_Checked(object sender, RoutedEventArgs e)
-        {
-            settings.ZenMode = true;
-            SettingsManager.Save(settings);
-            if (settings.EnableJiggle)
-            {
-                StartJiggling();
-            }
-        }
-
-        private void ChkZenMode_Unchecked(object sender, RoutedEventArgs e)
-        {
-            settings.ZenMode = false;
-            SettingsManager.Save(settings);
-            if (settings.EnableJiggle)
-            {
-                StartJiggling();
-            }
-        }
-        
         private void StartJiggling()
         {
-            MouseSimulator.Start(chkZenMode.IsChecked ?? false, settings.IntervalMs, settings.StopOnUserActivity, settings.UserInactivityTimeoutSeconds);
+            MouseSimulator.Start(false, settings.IntervalMs, settings.StopOnUserActivity, settings.UserInactivityTimeoutSeconds);
             UpdateStatus();
             SettingsManager.Save(settings);
         }
@@ -311,15 +283,14 @@ namespace Mishka
 
             if (MouseSimulator.IsRunning)
             {
-                string mode = MouseSimulator.IsZenMode ? " (Zen Mode)" : "";
                 if (MouseSimulator.IsPausedByUserActivity)
                 {
-                    txtStatus.Text = $"Paused: User activity detected{mode}";
+                    txtStatus.Text = "Paused: User activity detected";
                     txtStatus.Foreground = new SolidColorBrush(Colors.Orange);
                 }
                 else
                 {
-                    txtStatus.Text = $"Status: Running{mode}";
+                    txtStatus.Text = "Status: Running";
                     txtStatus.Foreground = new SolidColorBrush(Colors.LightGreen);
                 }
             }
