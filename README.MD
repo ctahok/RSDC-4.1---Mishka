@@ -1,4 +1,4 @@
-# Mishka: Advanced Mouse Jiggler Suite 🖱️
+# Mishka: Advanced Mouse Jiggler Suite 🖱️ v1.3.7
 
 **Version 1.1.1** - Minimal Movement, Maximum Reliability
 
